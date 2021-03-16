@@ -34,8 +34,8 @@ class Partitioner:
 if __name__ == '__main__':
   spark = SparkSession.builder.appName('tf_feature_analysis').enableHiveSupport().getOrCreate()
   date_str = sys.argv[1]
-  train_data = spark.read.text('s3://sprs.push.us-east-1.prod/data/warehouse/model/train_data/%s' % (date_str))
+  train_data = spark.read.text('s3://sprs.push.us-east-1.prod/data/warehouse/midas_offline_model/train_data/%s' % (date_str))
   p = Partitioner()
   rdd = train_data.rdd.mapPartitions(p.processPartition).flatMap(lambda x:x).reduceByKey(add). \
       map(lambda x: '\t'.join(map(str, (x[0][0], x[0][1], x[0][2], x[0][3], x[1]))))
-  rdd.saveAsTextFile('s3://sprs.push.us-east-1.prod/data/warehouse/model/model_analysis/%s' % (date_str))
+  rdd.saveAsTextFile('s3://sprs.push.us-east-1.prod/data/warehouse/midas_offline_model/model_analysis/%s' % (date_str))
