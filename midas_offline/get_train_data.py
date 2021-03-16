@@ -53,7 +53,7 @@ def build_train_data(data, ad_counter_dict):
         else:
             user_counter_json[pb_key] = copy.deepcopy(user_counter_dict['storeUserCounter'].get(key, {}))
 
-    sample_json['feature']['context'] = {'posId': sample.pos_id, 'appName': sample.package_name, \
+    sample_json['feature']['context'] = {'posId': sample.pos_id, 'appName': sample.package_name, 'nation': sample.nation, \
         'osVersion': sample.os_version, 'brand': sample.brand, 'model': sample.model, 'language': sample.system_language, \
         'appVersionCode': sample.app_version_code, 'clientIp': sample.client_ip, 'reqTime': sample.server_time}
 
