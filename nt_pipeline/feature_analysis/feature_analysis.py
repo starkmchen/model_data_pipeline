@@ -9,15 +9,12 @@ def mutual_info(name, feature):
   all_num = 0.0
   pos = 0.0
   neg = 0.0
-  null_num = 0.0
   for k,v in feature.iteritems():
     fea_pos = v[1]
     fea_neg = v[0]
     pos += fea_pos
     neg += fea_neg
     all_num = all_num + fea_pos + fea_neg
-    if k == '0':
-      null_num = fea_pos + fea_neg
   pos_ratio = pos / all_num
   neg_ratio = neg / all_num
   y_ent = pos_ratio * np.log2(pos_ratio) + neg_ratio * np.log2(neg_ratio)
@@ -35,7 +32,8 @@ def mutual_info(name, feature):
       v_ratio = fea_neg / all_num
       xy_ent += v_ratio * np.log2(v_ratio)
   mi_value = xy_ent - x_ent - y_ent
-  print name, len(feature), null_num, mi_value
+  print name, len(feature), mi_value
+
 
 def chi_analysis(name, feature):
   all_num = 0.0
