@@ -1,0 +1,26 @@
+from pyspark.sql import SparkSession
+from pyspark.sql import SQLContext
+from pyspark import SparkContext,SparkConf
+import sys
+import json
+import datetime
+
+def parse_rec_ads(data):
+  rec_ads = json.loads(data.value)
+  output = []
+  for ad in rec_ads.get('rec_ads', []):
+    new_ad = {"ad_id": int(ad["camp_id"]), "creative_id": int(ad["creative_id"]), "request_id": ad["request_id"]}
+    new_ad["feature"] = json.dumps(ad["feature"])
+    output.append(json.dumps(new_ad))
+  return output
+
+
+if __name__ == '__main__':
+  spark = SparkSession.builder.appName('nt_train_feature').enableHiveSupport().getOrCreate()
+  out_date = sys.argv[1]
+  out_day = datetime.datetime.strptime(out_date, "%Y%m%d%H").strftime("%Y%m%d")
+  out_hour = datetime.datetime.strptime(out_date, "%Y%m%d%H").strftime("%H")
+  in_date = (datetime.datetime.strptime(out_date, "%Y%m%d%H") + datetime.timedelta(hours = 8)).strftime("%Y/%m/%d/%H")
+  data = spark.read.text('s3://cbs.metis.ap-southeast-1/sprs/ad-model-server-basic/sprs_ad-model-server-basic_stat_rec_ad/prod/%s' % in_date)
+  rdd = data.rdd.map(lambda x: parse_rec_ads(x)).filter(lambda data: bool(data)).flatMap(lambda x:x)
+  rdd.saveAsTextFile('s3://sprs.push.us-east-1.prod/data/warehouse/model/nt_train_feature_hourly/dt=%s/hour=%s' % (out_day, out_hour))
