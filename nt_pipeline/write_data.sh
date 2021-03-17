@@ -99,7 +99,7 @@ function write_user_profile()
 
 function write_data()
 {
-  cd /home/chenmin/model_data_pipeline/write_pb
+  cd write_pb
   write_ad_counter &
   write_ad_info &
   write_user_profile &

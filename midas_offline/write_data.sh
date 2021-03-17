@@ -75,7 +75,7 @@ function write_ad_info()
 
 function write_data()
 {
-  cd /home/chenmin/model_data_pipeline/write_pb
+  cd write_pb
   write_ad_counter &
   write_ad_info &
 }
