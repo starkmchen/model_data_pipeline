@@ -1,5 +1,6 @@
 #!/bin/bash
 set -x
+work_dir=$(pwd)
 
 feature_date=$(date -d "1 day ago" +%Y%m%d)
 
@@ -8,7 +9,7 @@ function alert()
     ret=$1
     script=$2
     if [ $ret -ne 0 ];then
-        python /home/chenmin/model_data_pipeline/send_message.py "AD $script error"
+        python ${work_dir}/send_message.py "AD $script error"
     fi
 }
 
