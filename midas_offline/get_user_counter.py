@@ -38,7 +38,7 @@ def build_user_counter(data):
 if __name__ == '__main__':
   spark = SparkSession.builder.appName('midas_offline_get_user_counter').enableHiveSupport().getOrCreate()
   date_str = sys.argv[1]
-  sql = "select * from sprs_ad_dws.dws_midas_offline_user_accu_inc_daily where dt = '%s' and tag = '3d'" % (date_str)
+  sql = "select * from sprs_ad_dws.dws_midas_offline_user_accu_inc_daily where dt = '%s' and tag = '3d' and req_country = 'EG'" % (date_str)
   rdd = spark.sql(sql).rdd.map(lambda x:(x.beyla_id, (x.tag, x.package_name, x.pos_id,
        x.ad_package_name, x.ad_id, x.ad_package_category, x.c_id,
        x.imp_sum, x.click_sum, x.install_sum))).groupByKey().mapValues(list).map(lambda x:build_user_counter(x))

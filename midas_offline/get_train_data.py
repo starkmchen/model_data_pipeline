@@ -90,7 +90,7 @@ if __name__ == '__main__':
   sql = "select beyla_id, req_country, package_name, pos_id, client_ip,server_time,os_version,brand,model, \
       system_language, app_version_code, ad_package_name, ad_package_category, ad_id, c_id, is_auto_download, \
       is_click, is_install, user_counter.pb as counter_pb, user_profile.pb as profile_pb \
-      from (select * from sprs_ad_dws.dws_beyla_midas_offline_inc_daily where dt = '%s') label_t \
+      from (select * from sprs_ad_dws.dws_beyla_midas_offline_inc_daily where dt = '%s' and req_country = 'EG') label_t \
       left join user_counter on label_t.beyla_id = user_counter.user_id \
       left join user_profile on label_t.beyla_id = user_profile.user_id" % (label_date)
 
