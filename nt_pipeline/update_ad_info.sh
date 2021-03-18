@@ -1,7 +1,17 @@
 #!/bin/bash
+set -x
 
 now_hour=$(date -d "1 hour ago" +%Y%m%d%H)
 now_day=$(date -d "1 hour ago" +%Y%m%d)
+
+function alert()
+{
+    ret=$1
+    script=$2
+    if [ $ret -ne 0 ];then
+        python send_message.py "AD $script error"
+    fi
+}
 
 function download_pkg_category()
 {
