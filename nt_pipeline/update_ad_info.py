@@ -21,7 +21,7 @@ def update_creative_info(store_ad_info):
   host = "prod.cpi-platform-ro.ads.sg1.mysql"
   user = "cpi_platform_reader"
   passwd = "mEAYkZeJVQ7KjsMv8WKqWXumiehAhKCD"
-  before_day = (datetime.datetime.now() - datetime.timedelta(days = 7)).strftime("%Y-%m-%d %H:%M:%S")
+  before_day = (datetime.datetime.now() - datetime.timedelta(days = 4)).strftime("%Y-%m-%d %H:%M:%S")
   sql = "select id,create_time from cpi_platform.creatives where create_time > STR_TO_DATE('%s', '%%Y-%%m-%%d %%H:%%i:%%s')" % before_day
   result = get_mysql_result(host, sql, user, passwd)
   for item in result:
