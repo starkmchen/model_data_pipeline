@@ -18,7 +18,7 @@ function download_pkg_category()
   fname=$(aws s3 ls s3://sprs.push.us-east-1.prod/data/warehouse/model/pkg_info/ | tail -n 1 | awk '{print $2}')
   full_fname=s3://sprs.push.us-east-1.prod/data/warehouse/model/pkg_info/$fname
   aws s3 sync $full_fname pkg_info_dir.${now_hour}
-  cat pkg_info_dir.${now_hour} > pkg_info.${now_hour}
+  cat pkg_info_dir.${now_hour}/* > pkg_info.${now_hour}
   rm -r pkg_info_dir.${now_hour}
 }
 
