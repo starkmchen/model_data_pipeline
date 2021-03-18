@@ -45,6 +45,7 @@ function rmfile()
 {
   rm pkg_info.pb.${now_hour}
   rm pkg_info.${now_hour}
+  rm pkg_info.pb.${now_hour}.md5
 }
 
 
