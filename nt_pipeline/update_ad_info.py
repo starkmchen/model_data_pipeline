@@ -1,6 +1,8 @@
 import mysql.connector
 import datetime
 import sys
+import json
+from google.protobuf import json_format
 from store_table_pb2 import StoreAdInfo
 from model_ad_pb2 import AdInfo
 
@@ -42,7 +44,7 @@ def main(argv):
     store_ad_info = load_pkg_category(argv[0])
     update_creative_info(store_ad_info)
     f = open(argv[1], 'wb')
-    f.write(a.SerializeToString())
+    f.write(store_ad_info.SerializeToString())
     f.close()
 
 if __name__ == '__main__':
