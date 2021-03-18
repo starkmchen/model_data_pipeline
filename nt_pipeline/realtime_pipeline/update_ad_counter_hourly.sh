@@ -49,12 +49,12 @@ aws s3 sync s3://sprs.push.us-east-1.prod/data/warehouse/model/repostback_instal
 function merge_hourly_file()
 {
 rm -f attr_install.$now_hour
-for fname in $(ls hour_data/attr_install);do
+for fname in $(ls hour_data/attr_install | tail -n 24);do
   cat hour_data/attr_install/$fname/* | awk -F '\t' '{if($5 != "com.lenovo.anyshare.gps") print $0}' >> attr_install.$now_hour
 done
 
 rm -f imp_click.$now_hour
-for fname in $(ls hour_data/imp_click);do
+for fname in $(ls hour_data/imp_click | tail -n 24);do
   cat hour_data/imp_click/$fname/* >> imp_click.$now_hour
 done
 }
