@@ -76,6 +76,10 @@ python update_ad_counter_hourly.py ad_counter_day.$now_hour imp_click.$now_hour 
 ret=$?
 alert $ret update_ad_counter_hourly.py
 
+if [ $ret -ne 0 ];then
+   return
+fi
+
 md5sum ad_counter_$now_hour.pb | awk '{print $1}' > ad_counter_$now_hour.pb.md5
 aws s3 cp ad_counter_$now_hour.pb s3://sprs-ads-sg1/prod/feature/ad_counter/$now_day/ad_counter_$now_hour.pb
 aws s3 cp ad_counter_$now_hour.pb.md5 s3://sprs-ads-sg1/prod/feature/ad_counter/$now_day/ad_counter_$now_hour.pb.md5
