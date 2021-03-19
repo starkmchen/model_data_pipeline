@@ -100,11 +100,12 @@ function get_train_data()
   feature_date=$(date -d "1 day ago $label_date" +%Y%m%d)
   submit_task get_train_data.py $feature_date $label_date
 
-  tf_submit_task tf_feature_analysis.py $now_day
+  #tf_submit_task tf_feature_analysis.py $now_day
 }
 
 function main()
 {
+file_exist s3://sprs.push.us-east-1.prod/data/warehouse/sprs_ad_dws/dws_midas_offline_ad_accu_inc_daily/dt=$now_day
 extract_feature
 get_train_data
 }
