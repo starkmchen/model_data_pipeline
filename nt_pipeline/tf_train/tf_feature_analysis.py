@@ -23,12 +23,13 @@ class Partitioner:
     for data in partition:
       output = []
       sample = data.value
-      try:
-        obj = json.loads(self.fe_lib.extract(sample))
-      except:
+      tf_sample = self.fe_lib.extract(sample)
+      if len(tf_sample) == 0:
         continue
+      obj = json.loads(tf_sample)
       click = obj['label']['click']
       attr_install = obj['label']['attr_install']
+      obj = json.loads(tf_sample)
       for k, v in obj.get('int_features', {}).items():
         output.append(((k,v, click, attr_install), 1))
       yield output
