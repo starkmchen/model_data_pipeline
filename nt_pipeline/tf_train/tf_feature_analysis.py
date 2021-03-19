@@ -23,7 +23,10 @@ class Partitioner:
     for data in partition:
       output = []
       sample = data.value
-      obj = json.loads(self.fe_lib.extract(sample))
+      try:
+        obj = json.loads(self.fe_lib.extract(sample))
+      except:
+        continue
       click = obj['label']['click']
       attr_install = obj['label']['attr_install']
       for k, v in obj.get('int_features', {}).items():
