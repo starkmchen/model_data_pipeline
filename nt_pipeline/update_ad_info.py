@@ -33,6 +33,21 @@ def update_creative_info(store_ad_info):
       store_ad_info.ad_infos[key].CopyFrom(ad_info)
 
 
+def update_ad_info(store_ad_info):
+  host = "prod.cpi-platform-ro.ads.sg1.mysql"
+  user = "cpi_platform_reader"
+  passwd = "mEAYkZeJVQ7KjsMv8WKqWXumiehAhKCD"
+  before_day = (datetime.datetime.now() - datetime.timedelta(days = 4)).strftime("%Y-%m-%d %H:%M:%S")
+  sql = "select id, day_max from cpi_platform.campaigns"
+  result = get_mysql_result(host, sql, user, passwd)
+  for item in result:
+      ad_id = item[0]
+      day_cap = item[1]
+      ad_info = AdInfo()
+      ad_info.day_cap = day_cap
+      key = "ad_id#%s" % ad_id
+      store_ad_info.ad_infos[key].CopyFrom(ad_info)
+
 def load_pkg_category(fname):
   f = open(fname)
   j = json.load(f)
