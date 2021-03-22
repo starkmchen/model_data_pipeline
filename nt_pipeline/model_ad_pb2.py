@@ -20,7 +20,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   syntax='proto3',
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_pb=b'\n\x0emodel_ad.proto\x1a\x19model_count_feature.proto\".\n\x08\x43reative\x12\x13\n\x0b\x63reative_id\x18\x01 \x01(\t\x12\r\n\x05\x63p_id\x18\x02 \x01(\t\"\xca\x01\n\x06\x41\x64Info\x12\r\n\x05\x61\x64_id\x18\x01 \x01(\x03\x12\x0e\n\x06\x61pp_id\x18\x02 \x01(\t\x12\x10\n\x08\x63\x61tegory\x18\x03 \x01(\t\x12\x1c\n\tcreatives\x18\x04 \x03(\x0b\x32\t.Creative\x12\x15\n\rattr_platform\x18\x05 \x01(\x03\x12\x18\n\x10is_auto_download\x18\x06 \x01(\x03\x12\x13\n\x0b\x63reative_id\x18\x07 \x01(\t\x12\r\n\x05\x63p_id\x18\x08 \x01(\t\x12\x1c\n\x14\x63reative_create_time\x18\t \x01(\x03\"\x83\x03\n\x07\x41\x64\x43ount\x12$\n\x05\x61\x64_id\x18\x01 \x01(\x0b\x32\x15.BusinessCountFeature\x12.\n\x0f\x61\x64_package_name\x18\x02 \x01(\x0b\x32\x15.BusinessCountFeature\x12\x32\n\x13\x61\x64_package_category\x18\x03 \x01(\x0b\x32\x15.BusinessCountFeature\x12+\n\x0cpos_id_ad_id\x18\x04 \x01(\x0b\x32\x15.BusinessCountFeature\x12\x35\n\x16pos_id_ad_package_name\x18\x05 \x01(\x0b\x32\x15.BusinessCountFeature\x12#\n\x04\x63_id\x18\x06 \x01(\x0b\x32\x15.BusinessCountFeature\x12*\n\x0bpos_id_c_id\x18\x07 \x01(\x0b\x32\x15.BusinessCountFeature\x12\x39\n\x1apos_id_ad_package_category\x18\x08 \x01(\x0b\x32\x15.BusinessCountFeature\"@\n\x06\x41\x64\x44\x61ta\x12\x18\n\x07\x61\x64_info\x18\x01 \x01(\x0b\x32\x07.AdInfo\x12\x1c\n\nad_counter\x18\x02 \x01(\x0b\x32\x08.AdCountb\x06proto3'
+  serialized_pb=b'\n\x0emodel_ad.proto\x1a\x19model_count_feature.proto\".\n\x08\x43reative\x12\x13\n\x0b\x63reative_id\x18\x01 \x01(\t\x12\r\n\x05\x63p_id\x18\x02 \x01(\t\"\xe8\x01\n\x06\x41\x64Info\x12\r\n\x05\x61\x64_id\x18\x01 \x01(\x03\x12\x0e\n\x06\x61pp_id\x18\x02 \x01(\t\x12\x10\n\x08\x63\x61tegory\x18\x03 \x01(\t\x12\x1c\n\tcreatives\x18\x04 \x03(\x0b\x32\t.Creative\x12\x15\n\rattr_platform\x18\x05 \x01(\x03\x12\x18\n\x10is_auto_download\x18\x06 \x01(\x03\x12\x13\n\x0b\x63reative_id\x18\x07 \x01(\t\x12\r\n\x05\x63p_id\x18\x08 \x01(\t\x12\x1c\n\x14\x63reative_create_time\x18\t \x01(\x03\x12\x1c\n\x14\x64\x61y_attr_install_cap\x18\n \x01(\x05\"\x83\x03\n\x07\x41\x64\x43ount\x12$\n\x05\x61\x64_id\x18\x01 \x01(\x0b\x32\x15.BusinessCountFeature\x12.\n\x0f\x61\x64_package_name\x18\x02 \x01(\x0b\x32\x15.BusinessCountFeature\x12\x32\n\x13\x61\x64_package_category\x18\x03 \x01(\x0b\x32\x15.BusinessCountFeature\x12+\n\x0cpos_id_ad_id\x18\x04 \x01(\x0b\x32\x15.BusinessCountFeature\x12\x35\n\x16pos_id_ad_package_name\x18\x05 \x01(\x0b\x32\x15.BusinessCountFeature\x12#\n\x04\x63_id\x18\x06 \x01(\x0b\x32\x15.BusinessCountFeature\x12*\n\x0bpos_id_c_id\x18\x07 \x01(\x0b\x32\x15.BusinessCountFeature\x12\x39\n\x1apos_id_ad_package_category\x18\x08 \x01(\x0b\x32\x15.BusinessCountFeature\"@\n\x06\x41\x64\x44\x61ta\x12\x18\n\x07\x61\x64_info\x18\x01 \x01(\x0b\x32\x07.AdInfo\x12\x1c\n\nad_counter\x18\x02 \x01(\x0b\x32\x08.AdCountb\x06proto3'
   ,
   dependencies=[model__count__feature__pb2.DESCRIPTOR,])
 
@@ -137,6 +137,13 @@ _ADINFO = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='day_attr_install_cap', full_name='AdInfo.day_attr_install_cap', index=9,
+      number=10, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
   ],
   extensions=[
   ],
@@ -150,7 +157,7 @@ _ADINFO = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=94,
-  serialized_end=296,
+  serialized_end=326,
 )
 
 
@@ -230,8 +237,8 @@ _ADCOUNT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=299,
-  serialized_end=686,
+  serialized_start=329,
+  serialized_end=716,
 )
 
 
@@ -269,8 +276,8 @@ _ADDATA = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=688,
-  serialized_end=752,
+  serialized_start=718,
+  serialized_end=782,
 )
 
 _ADINFO.fields_by_name['creatives'].message_type = _CREATIVE
