@@ -19,7 +19,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   syntax='proto3',
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_pb=b'\n\x19model_count_feature.proto\"\xca\x03\n\x14\x42usinessCountFeature\x12\x43\n\x11\x63ount_features_7d\x18\x01 \x01(\x0b\x32(.BusinessCountFeature.ActionCountFeature\x12\x44\n\x12\x63ount_features_14d\x18\x02 \x01(\x0b\x32(.BusinessCountFeature.ActionCountFeature\x12\x44\n\x12\x63ount_features_30d\x18\x03 \x01(\x0b\x32(.BusinessCountFeature.ActionCountFeature\x12\x43\n\x11\x63ount_features_1d\x18\x04 \x01(\x0b\x32(.BusinessCountFeature.ActionCountFeature\x12\x43\n\x11\x63ount_features_3d\x18\x05 \x01(\x0b\x32(.BusinessCountFeature.ActionCountFeature\x1aW\n\x12\x41\x63tionCountFeature\x12\x0b\n\x03imp\x18\x01 \x01(\x05\x12\r\n\x05\x63lick\x18\x02 \x01(\x05\x12\x0f\n\x07install\x18\x03 \x01(\x05\x12\x14\n\x0c\x61ttr_install\x18\x04 \x01(\x05\x62\x06proto3'
+  serialized_pb=b'\n\x19model_count_feature.proto\"\x92\x04\n\x14\x42usinessCountFeature\x12\x43\n\x11\x63ount_features_7d\x18\x01 \x01(\x0b\x32(.BusinessCountFeature.ActionCountFeature\x12\x44\n\x12\x63ount_features_14d\x18\x02 \x01(\x0b\x32(.BusinessCountFeature.ActionCountFeature\x12\x44\n\x12\x63ount_features_30d\x18\x03 \x01(\x0b\x32(.BusinessCountFeature.ActionCountFeature\x12\x43\n\x11\x63ount_features_1d\x18\x04 \x01(\x0b\x32(.BusinessCountFeature.ActionCountFeature\x12\x43\n\x11\x63ount_features_3d\x18\x05 \x01(\x0b\x32(.BusinessCountFeature.ActionCountFeature\x12\x46\n\x14\x63ount_features_bj_3d\x18\x06 \x01(\x0b\x32(.BusinessCountFeature.ActionCountFeature\x1aW\n\x12\x41\x63tionCountFeature\x12\x0b\n\x03imp\x18\x01 \x01(\x05\x12\r\n\x05\x63lick\x18\x02 \x01(\x05\x12\x0f\n\x07install\x18\x03 \x01(\x05\x12\x14\n\x0c\x61ttr_install\x18\x04 \x01(\x05\x62\x06proto3'
 )
 
 
@@ -73,8 +73,8 @@ _BUSINESSCOUNTFEATURE_ACTIONCOUNTFEATURE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=401,
-  serialized_end=488,
+  serialized_start=473,
+  serialized_end=560,
 )
 
 _BUSINESSCOUNTFEATURE = _descriptor.Descriptor(
@@ -120,6 +120,13 @@ _BUSINESSCOUNTFEATURE = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='count_features_bj_3d', full_name='BusinessCountFeature.count_features_bj_3d', index=5,
+      number=6, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
   ],
   extensions=[
   ],
@@ -133,7 +140,7 @@ _BUSINESSCOUNTFEATURE = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=30,
-  serialized_end=488,
+  serialized_end=560,
 )
 
 _BUSINESSCOUNTFEATURE_ACTIONCOUNTFEATURE.containing_type = _BUSINESSCOUNTFEATURE
@@ -142,6 +149,7 @@ _BUSINESSCOUNTFEATURE.fields_by_name['count_features_14d'].message_type = _BUSIN
 _BUSINESSCOUNTFEATURE.fields_by_name['count_features_30d'].message_type = _BUSINESSCOUNTFEATURE_ACTIONCOUNTFEATURE
 _BUSINESSCOUNTFEATURE.fields_by_name['count_features_1d'].message_type = _BUSINESSCOUNTFEATURE_ACTIONCOUNTFEATURE
 _BUSINESSCOUNTFEATURE.fields_by_name['count_features_3d'].message_type = _BUSINESSCOUNTFEATURE_ACTIONCOUNTFEATURE
+_BUSINESSCOUNTFEATURE.fields_by_name['count_features_bj_3d'].message_type = _BUSINESSCOUNTFEATURE_ACTIONCOUNTFEATURE
 DESCRIPTOR.message_types_by_name['BusinessCountFeature'] = _BUSINESSCOUNTFEATURE
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
