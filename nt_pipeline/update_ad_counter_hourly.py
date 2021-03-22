@@ -71,7 +71,8 @@ def merge_counter(rt_counter, day_counter):
         merge_feature_counter('countFeatures3d', new_1d_counter, day_counter[feature_key])
         merge_feature_counter('countFeatures7d', new_1d_counter, day_counter[feature_key])
         counter_bj_key = 'countFeaturesBj1d'
-        day_counter[feature_key][counter_bj_key] = feature_counter[counter_bj_key]
+        if counter_bj_key in feature_counter:
+            day_counter[feature_key][counter_bj_key] = feature_counter[counter_bj_key]
 
 
 def main(argv):
