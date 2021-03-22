@@ -44,7 +44,7 @@ def update_ad_info(store_ad_info):
       ad_id = item[0]
       day_cap = item[1]
       ad_info = AdInfo()
-      ad_info.day_cap = day_cap
+      ad_info.day_attr_install_cap = day_cap
       key = "ad_id#%s" % ad_id
       store_ad_info.ad_infos[key].CopyFrom(ad_info)
 
@@ -58,6 +58,7 @@ def load_pkg_category(fname):
 def main(argv):
     store_ad_info = load_pkg_category(argv[0])
     update_creative_info(store_ad_info)
+    update_ad_info(store_ad_info)
     f = open(argv[1], 'wb')
     f.write(store_ad_info.SerializeToString())
     f.close()
