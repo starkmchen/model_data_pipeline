@@ -43,6 +43,8 @@ def update_ad_info(store_ad_info):
   for item in result:
       ad_id = item[0]
       day_cap = item[1]
+      if day_cap <= 0:
+          continue
       ad_info = AdInfo()
       ad_info.day_attr_install_cap = day_cap
       key = "ad_id#%s" % ad_id
