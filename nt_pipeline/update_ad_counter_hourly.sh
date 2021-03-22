@@ -49,8 +49,15 @@ aws s3 sync s3://sprs.push.us-east-1.prod/data/warehouse/model/repostback_instal
 function merge_hourly_file()
 {
 rm -f attr_install.$now_hour
+rm -f bj_attr_install.$now_hour
+bj_day=$(date -d "8 hour ago" +%Y%m%d)
 for fname in $(ls hour_data/attr_install | tail -n 24);do
   cat hour_data/attr_install/$fname/* | awk -F '\t' '{if($5 != "com.lenovo.anyshare.gps") print $0}' >> attr_install.$now_hour
+  bj_begin_hour=$(date -d "8 hour ago $bj_day" +%Y%m%d%H)
+  bj_end_hour=$(date -d "16 hour $bj_day" +%Y%m%d%H)
+  if [ $fname -ge $bj_begin_hour -a $fname -lt $bj_end_hour ] ;then
+    cat hour_data/attr_install/$fname/* | awk -F '\t' '{if($5 != "com.lenovo.anyshare.gps") print $0}' >> bj_attr_install.$now_hour
+  fi
 done
 
 rm -f imp_click.$now_hour
@@ -63,6 +70,7 @@ function rm_file()
 {
   rm ad_counter_day.$now_hour
   rm attr_install.$now_hour
+  rm bj_attr_install.$now_hour
   rm imp_click.$now_hour
   rm ad_counter_$now_hour.pb
   rm ad_counter_$now_hour.pb.md5
@@ -72,7 +80,7 @@ function rm_file()
 
 function process()
 {
-python update_ad_counter_hourly.py ad_counter_day.$now_hour imp_click.$now_hour attr_install.$now_hour ad_counter_$now_hour.pb
+python update_ad_counter_hourly.py ad_counter_day.$now_hour imp_click.$now_hour attr_install.$now_hour bj_attr_install.$now_hour ad_counter_$now_hour.pb
 ret=$?
 alert $ret update_ad_counter_hourly.py
 

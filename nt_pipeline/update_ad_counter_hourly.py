@@ -7,15 +7,20 @@ from google.protobuf import json_format
 from feature_conf import ad_count_feature_conf
 
 
-def get_rt_counter(rt_counter, sample, event_name):
+def get_rt_counter(rt_counter, sample, event_name, tag = "normal"):
     for conf in ad_count_feature_conf:
         if 'category' in conf:
+            continue
+        if tag == 'bj' and conf != 'ad_id':
             continue
         ele_names = map(lambda x: str(getattr(sample, x)), conf.split('#'))
         ele_name = '#'.join([conf] + ele_names)
         if ele_name not in rt_counter:
             rt_counter[ele_name] = {}
-        counter_key = 'countFeatures1d'
+        if tag == 'bj':
+            counter_key = 'countFeaturesBj1d'
+        else:
+            counter_key = 'countFeatures1d'
         if counter_key not in rt_counter[ele_name]:
             rt_counter[ele_name][counter_key] = {}
         if event_name not in rt_counter[ele_name][counter_key]:
@@ -38,13 +43,13 @@ def load_hourly_imp_click(fname, rt_counter):
             continue
         get_rt_counter(rt_counter, sample, event_name)
 
-def load_hourly_install(fname, rt_counter):
+def load_hourly_install(fname, rt_counter, tag = 'normal'):
     Sample = namedtuple('Sample', 'requestid,beyla_id, country, pos_id, package_name, ad_package_name, ad_id, c_id')
     f = open(fname)
     for line in f:
         li = line.strip().split('\t')
         sample = Sample(*li)
-        get_rt_counter(rt_counter, sample, 'attrInstall')
+        get_rt_counter(rt_counter, sample, 'attrInstall', tag)
 
 def merge_feature_counter(counter_name, new_fea_counter, old_counter):
     if counter_name not in old_counter:
@@ -72,6 +77,7 @@ def main(argv):
     rt_counter = {field_name : {}}
     load_hourly_imp_click(argv[1], rt_counter[field_name])
     load_hourly_install(argv[2], rt_counter[field_name])
+    load_hourly_install(argv[3], rt_counter[field_name], 'bj')
 
     f = open(argv[0])
     day_counter = json.load(f)
@@ -79,7 +85,7 @@ def main(argv):
 
     a = StoreAdCounter()
     json_format.Parse(json.dumps(day_counter), a)
-    f = open(argv[3], 'wb')
+    f = open(argv[4], 'wb')
     f.write(a.SerializeToString())
     f.close()
 
