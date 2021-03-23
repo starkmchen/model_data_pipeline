@@ -108,6 +108,7 @@ function main()
 file_exist s3://sprs.push.us-east-1.prod/data/warehouse/sprs_ad_dws/dws_midas_offline_ad_accu_inc_daily/dt=$now_day
 extract_feature
 get_train_data
+./write_data.sh
 }
 
 main > log/model_data_log.$now_day 2>&1
