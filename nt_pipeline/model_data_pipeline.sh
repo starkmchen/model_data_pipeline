@@ -105,7 +105,7 @@ function get_train_data()
 
 function main()
 {
-file_exist s3://sprs.push.us-east-1.prod/data/warehouse/sprs_ad_dwd/user_app_list_temp
+file_exist s3://sprs.push.us-east-1.prod/data/warehouse/sprs_ad_dwd/user_app_list_temp/dt=$now_day
 extract_feature
 }
 
