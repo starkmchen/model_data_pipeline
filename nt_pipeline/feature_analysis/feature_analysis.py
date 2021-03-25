@@ -32,7 +32,7 @@ def mutual_info(fp, name, feature):
       v_ratio = fea_neg / all_num
       xy_ent += v_ratio * np.log2(v_ratio)
   mi_value = xy_ent - x_ent - y_ent
-  fp.write('\t'.join(map(str, [name, len(feature), mi_value])))
+  fp.write('\t'.join(map(str, [name, len(feature), mi_value])) + '\n')
 
 
 def chi_analysis(fp, name, feature):
@@ -77,16 +77,16 @@ def main(argv):
     click = int(click)
     install = int(install)
     imp = int(imp)
-    feature_count[fea_k][fea_v][click] += imp
+    feature_count_ctr[fea_k][fea_v][click] += imp
     if click > 0:
-        feature_count[fea_k][fea_v][install] += imp
+        feature_count_cvr[fea_k][fea_v][install] += imp
   f_ctr = open(argv[1], 'w')
   for fea_k, v in feature_count_ctr.iteritems():
-    chi_analysis(f_ctr, fea_k, v)
+    #chi_analysis(f_ctr, fea_k, v)
     mutual_info(f_ctr, fea_k, v)
   f_cvr = open(argv[2], 'w')
   for fea_k, v in feature_count_cvr.iteritems():
-    chi_analysis(f_cvr, fea_k, v)
+    #chi_analysis(f_cvr, fea_k, v)
     mutual_info(f_cvr, fea_k, v)
 
 
