@@ -5,7 +5,7 @@ import numpy as np
 from scipy.stats import chi2_contingency
 from scipy.stats import chi2
 
-def mutual_info(name, feature):
+def mutual_info(fp, name, feature):
   all_num = 0.0
   pos = 0.0
   neg = 0.0
@@ -32,10 +32,10 @@ def mutual_info(name, feature):
       v_ratio = fea_neg / all_num
       xy_ent += v_ratio * np.log2(v_ratio)
   mi_value = xy_ent - x_ent - y_ent
-  print name, len(feature), mi_value
+  fp.write('\t'.join(map(str, [name, len(feature), mi_value])))
 
 
-def chi_analysis(name, feature):
+def chi_analysis(fp, name, feature):
   all_num = 0.0
   pos = 0.0
   neg = 0.0
@@ -69,7 +69,8 @@ def chi_analysis(name, feature):
   print len(feature), chi_sum
 
 def main(argv):
-  feature_count = defaultdict(lambda: defaultdict(lambda: defaultdict(float)))
+  feature_count_ctr = defaultdict(lambda: defaultdict(lambda: defaultdict(float)))
+  feature_count_cvr = defaultdict(lambda: defaultdict(lambda: defaultdict(float)))
   f = open(argv[0])
   for line in f:
     fea_k, fea_v, click, install, imp = line.strip().split('\t')
@@ -77,9 +78,19 @@ def main(argv):
     install = int(install)
     imp = int(imp)
     feature_count[fea_k][fea_v][click] += imp
-  for fea_k, v in feature_count.iteritems():
-    chi_analysis(fea_k, v)
-    mutual_info(fea_k, v)
+    if click > 0:
+        feature_count[fea_k][fea_v][install] += imp
+  f_ctr = open(argv[1], 'w')
+  for fea_k, v in feature_count_ctr.iteritems():
+    chi_analysis(f_ctr, fea_k, v)
+    mutual_info(f_ctr, fea_k, v)
+  f_cvr = open(argv[2], 'w')
+  for fea_k, v in feature_count_cvr.iteritems():
+    chi_analysis(f_cvr, fea_k, v)
+    mutual_info(f_cvr, fea_k, v)
+
+
+
 
 
 if __name__ == '__main__':
