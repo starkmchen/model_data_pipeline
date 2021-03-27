@@ -10,7 +10,7 @@ from feature_conf import ad_count_feature_conf
 
 def build_ad_counter(data):
   ad_counter = defaultdict(Counter)
-  Sample = namedtuple('Sample', 'tag, pos_id, ad_id, \
+  Sample = namedtuple('Sample', 'tag, package_name, pos_id, ad_id, \
       ad_package_name, ad_package_category, c_id, imp, click, attr_install')
   for item in data:
     sample = Sample(*item)
@@ -34,7 +34,7 @@ def build_ad_counter(data):
 if __name__ == '__main__':
   spark = SparkSession.builder.appName('get_ad_counter').enableHiveSupport().getOrCreate()
   date_str = sys.argv[1]
-  sql = "select tag, pos_id,ad_id,ad_package_name,ad_package_category,c_id,imp_sum, click_sum, attr_install_sum \
+  sql = "select tag, package_name, pos_id,ad_id,ad_package_name,ad_package_category,c_id,imp_sum, click_sum, attr_install_sum \
       from sprs_ad_dwd.ads_feature_accu_temp where dt = '%s'" % (date_str)
   data = spark.sql(sql).rdd.collect()
   data = build_ad_counter(data)
