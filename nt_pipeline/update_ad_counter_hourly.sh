@@ -75,7 +75,7 @@ function rm_file()
   rm ad_counter_$now_hour.pb
   rm ad_counter_$now_hour.pb.md5
   find hour_data/imp_click/* -mtime +1 | xargs rm -r
-  find hour_data/attr_install/* -mtime +1 | xargs rm -r
+  find hour_data/attr_install/* -mtime +3 | xargs rm -r
 }
 
 function process()
