@@ -18,7 +18,7 @@ if __name__ == '__main__':
   feature_date = sys.argv[1]
 
   df_label = spark.sql("select rid, ad_id, c_id, is_click, is_attr_install from sprs_ad_dwd.imp_click_install_temp \
-      where dt = '%s' and package_name in ('video.likeit', 'video.watchit')" % feature_date)
+      where dt = '%s' and package_name in ('video.likeit', 'video.watchit', 'video.likeit.lite')" % feature_date)
 
   df_feature = spark.read.json('s3://sprs.push.us-east-1.prod/data/warehouse/model/nt_train_feature_hourly/dt=%s' % feature_date)
 
