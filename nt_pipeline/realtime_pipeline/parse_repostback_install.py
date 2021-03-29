@@ -20,6 +20,6 @@ if __name__ == '__main__':
   df = spark.read.parquet("s3://shareit.ads.ap-southeast-1/dw/table/dwd/dwd_adcs_adping_logs_detail_hour/dt=%s/hour=%s/flag=repostback" % (out_day, out_hour))
   df.createOrReplaceTempView("repostback")
   sql = "select requestid,beyla_id, nation, placement, channel_pkg, pkg_name, cpi_camp_id, c_id from repostback \
-      where source = 'cpi' and channel_pkg in ('video.watchit', 'video.likeit')"
+      where source = 'cpi' and channel_pkg in ('video.watchit', 'video.likeit', 'video.likeit.lite')"
   rdd = spark.sql(sql).rdd.map(lambda x: build_data(x))
   rdd.saveAsTextFile('s3://sprs.push.us-east-1.prod/data/warehouse/model/repostback_install/%s' % (out_date))

@@ -26,6 +26,6 @@ if __name__ == '__main__':
   df = spark.read.parquet("s3://shareit.ads.ap-southeast-1/dw/table/dwb/dwb_adcs_cpi_logs_hour/dt=%s/hour=%s" % (out_day, out_hour))
   df.createOrReplaceTempView("imp_click")
   sql = "select requestid, beyla_id, country, pos_id, package_name, event_name, succ_camp from imp_click where \
-      sub_platform = 'cpi' and package_name in ('video.watchit', 'video.likeit') and event_name in ('AD_CpiShow', 'AD_CpiClick')"
+      sub_platform = 'cpi' and package_name in ('video.watchit', 'video.likeit', 'video.likeit.lite') and event_name in ('AD_CpiShow', 'AD_CpiClick')"
   rdd = spark.sql(sql).rdd.map(lambda x: build_data(x)).filter(lambda data: bool(data))
   rdd.saveAsTextFile('s3://sprs.push.us-east-1.prod/data/warehouse/model/nt_cpi_imp_click_hourly/%s' % (out_date))
