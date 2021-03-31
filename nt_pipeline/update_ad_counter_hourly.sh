@@ -50,7 +50,7 @@ function merge_hourly_file()
 {
 rm -f attr_install.$now_hour
 rm -f bj_attr_install.$now_hour
-bj_day=$(date -d "8 hour ago" +%Y%m%d)
+bj_day=$(date -d "8 hour" +%Y%m%d)
 for fname in $(ls hour_data/attr_install | tail -n 24);do
   cat hour_data/attr_install/$fname/* | awk -F '\t' '{if($5 != "com.lenovo.anyshare.gps") print $0}' >> attr_install.$now_hour
   bj_begin_hour=$(date -d "8 hour ago $bj_day" +%Y%m%d%H)
