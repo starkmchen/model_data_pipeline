@@ -14,7 +14,10 @@ def build_data(data):
   c_id = succ_camp['c_id']
   ad_id = succ_camp['campaign_id']
   ad_pkg_name = succ_camp['ad_package_name']
-  output = '\t'.join(map(str, [requestid, beyla_id, country, pos_id,  package_name, event_name, ad_pkg_name, ad_id, c_id]))
+  try:
+    output = '\t'.join(map(str, [requestid, beyla_id, country, pos_id,  package_name, event_name, ad_pkg_name, ad_id, c_id]))
+  except:
+    return ''
   return output
 
 
