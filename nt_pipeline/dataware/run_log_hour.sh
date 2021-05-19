@@ -51,4 +51,5 @@ function build_partition()
 submit_task parse_rec_log_hour.py
 submit_task parse_mixer_log_hour.py
 submit_task parse_train_feature_hourly.py
+submit_task parse_req_ads_log_hour.py
 build_partition
